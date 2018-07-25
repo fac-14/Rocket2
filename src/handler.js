@@ -36,6 +36,7 @@ const handler = {
     fs.readFile(
       buildPath("js/DOM.js", function(error, file) {
         if (error) {
+          response.write(500, {'Content-Type'})
         }
       })
     );
