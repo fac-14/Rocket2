@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>PokeGIF</title>
+  <link rel="icon" type="image" href="https://cdn3.iconfinder.com/data/icons/pokemons/500/Pokemon_shadom_pokeball_games_-512.png"
+  />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700,800" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" media="screen" href="style.css" />
+</head>
+
+<body>
+
+  <header>
+    <img src="pokegif-logo.png" alt="Pokegif logo">
+  </header>
+
+  <main>
+    <h1 class='visually-hidden'>Pokegif</h1>
+    <div class="pokemon-overlay pokemon-overlay-background">
+        <div class="pokemon-container">
+        <div class="pokemon-left">
+          <img src="pokeball-left.png">
+        </div>
+        <div class="pokemon-right">
+          <img src="pokeball-right.png" class="right-image"> 
+        </div>
+      </div>
+  </div>
+    <section id="pokemon">
+      <h2 id="pokemon-name"></h2>
+
+      <div id="pokemon-details">
+
+      </div>
+
+      <div id="pokemon-description">
+        
+      </div>
+
+      <div id="pokemon_GIF">
+        
+        <div id="image">
+
+        </div>
+
+        <button id="getNextGIF">Next GIF</button>
+
+      </div>
+
+    </section>
+
+  </main>
+
+  <footer class="search-box">
+    <label for "text-input" class="visually-hidden">Enter pokemon name</label>
+    <input type="text" id="search-input" name="searchInput" autocomplete="off" placeholder="Gotta search 'em all..." required>
+    <div class="search-buttons">
+      <label for "searchButton" class="visually-hidden">Search pokemon</label>
+      <button id="searchButton">Search</button>
+      <label for "randButton" class="visually-hidden">Get a random pokemon</label>
+      <button id="randButton">Random</button>
+    </div>
+  </footer>
+
+  <!-- scripts to be called after DOM is loaded -->
+  <script src="api.js" defer></script>
+  <script src="logic.js" defer></script>
+  <script src="DOM.js" defer></script>
+
+</body>
+
+</html>

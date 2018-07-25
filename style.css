@@ -1,0 +1,572 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
+}
+body {
+  line-height: 1;
+}
+ol,
+ul {
+  list-style: none;
+}
+blockquote,
+q {
+  quotes: none;
+}
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: "";
+  content: none;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* use border-box so that padding and margins are applied INSIDE elements' width. */
+
+* {
+  box-sizing: border-box;
+}
+
+.visually-hidden {
+  position: absolute !important;
+  top: -9999px !important;
+  left: -9999px !important;
+}
+
+/* COLOUR PALETTE */
+
+/* #3663ad #ffcb05 #ff6b35 #d33f49 #565554 */
+
+body {
+  font-family: "Open Sans", sans-serif;
+  font-style: normal;
+}
+
+header {
+  width: 100vw;
+  height: 48px;
+  background-color: #3663ad;
+  padding-top: 8px;
+  position: fixed;
+  z-index: 2;
+}
+
+header > img {
+  display: block;
+  height: 32px;
+  margin: 0 auto;
+}
+
+main {
+  display: grid;
+  grid-template-columns:
+    1fr /* 1. column1 */
+    1fr /* 3. column2 */
+    1fr /* 5. column3 */
+    1fr; /* 7. column4 */
+  grid-column-gap: 16px;
+  grid-row-gap: 16px;
+  padding-left: 16px;
+  padding-right: 16px;
+  padding-top: 64px;
+}
+
+.search-box {
+  /* grid-column-start: 1;
+  grid-column-end: 5; */
+  height: 48px;
+  position:fixed;
+  bottom: 64px;
+  width: 100%;
+  background: #565554;
+  padding-top: 16px;
+}
+
+.search-box input {
+  width: calc(100% - 32px);
+  height: 32px;
+  border: 1px solid black;
+  padding: 8px;
+  font-size: 16px;
+  border-radius: 8px;
+  margin-left: 16px;
+  margin-right: 16px;
+}
+
+.search-box input:focus {
+  outline: none;
+  border: 3px solid #ff6b35;
+}
+
+.search-buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background: #565554;
+  padding-left: 16px;
+  padding-right: 16px;
+  padding-bottom: 24px;
+}
+
+button {
+  font-size: 16px;
+
+}
+
+.search-box button {
+  /* width is 50% i.e. 2 columns - half the gutter width (16 / 2 = 8px) */
+  width: calc(50% - 8px);
+  height: 32px;
+  background: #ffcb05;
+  border: 1px solid black;
+  margin-top: 16px;
+  border-radius: 8px;
+}
+
+.search-box button:focus,
+.search-box button:hover,
+#getNextGIF:focus,
+#getNextGIF:hover {
+  outline: none;
+  background: #ff6b35;
+  cursor: pointer;
+}
+
+/* Adding in the pokeball overlay */
+
+.pokemon-overlay {
+  height: 100vh;
+  position: absolute;
+  align-items: center;
+  bottom: 32px;
+  overflow-x: hidden;
+}
+
+.pokemon-overlay-background {
+  background-color: white;
+}
+
+.pokemon-container {
+  /* display: grid;
+  grid-template-columns: 1fr 1fr; */
+  width: 100vw;
+  display: flex;
+}
+
+.pokemon-container-rotate {
+  animation: rotate 2s infinite;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+}
+to {
+    transform: rotate(359deg);
+}
+}
+
+.pokemon-left > img {
+  height: 320px;
+}
+
+.pokemon-right > img {
+  height: 320px;
+}
+
+.pokemon-left {
+  background-color: white;
+  display: flex;
+  width: 50vw; 
+  justify-content: flex-end;
+  align-items: center;
+  /* background-image: url(./pokeball-left.png);
+  background-size: 150%;
+  background-repeat: no-repeat;
+  background-position-x: 11.5vw;
+  background-position-y: center; */
+  height: 100vh;
+}
+
+.pokemon-left-animation {
+  animation: exit-left 1s linear forwards;
+}
+
+.pokemon-left-enter {
+  animation: enter-left 2s linear forwards;
+}
+
+.pokemon-right {
+  background-color: white;
+  display: flex; 
+  justify-content: flex-start;
+  align-items: center;
+  width: 50vw;
+  /* background-image: url(./pokeball-right.png);
+  background-size: 150%;
+  background-repeat: no-repeat;  */
+  /* background-position-x: -38.5vw;
+  background-position-y: center; */
+  height: 100vh;
+}
+
+.pokemon-right-animation {
+  animation: exit-right 1s linear forwards;
+}
+
+.pokemon-right-enter {
+  animation: enter-left 2s linear forwards;
+}
+
+@keyframes exit-left {
+  100% {
+    transform: translate(-100%, 0);
+  }
+} 
+
+@keyframes exit-right {
+  100% {
+    transform: translate(100%, 0);
+  }
+}   
+
+@keyframes enter-left {
+  100% {
+    transform: translate(100%, 0);
+  }
+} 
+
+@keyframes enter-right {
+  100% {
+    transform: translate(-100%, 0);
+  }
+}  
+
+#pokemon {
+  grid-column-start: 1;
+  grid-column-end: 5;
+}
+
+#pokemon-details {
+  display: grid;
+  width: 100%;
+  grid-template-columns:
+    1fr /* 1. column1 */
+    1fr /* 3. column2 */
+    1fr /* 5. column3 */
+    1fr; /* 7. column4 */
+  grid-template-rows: 48px 48px 48px 48px;
+  grid-column-gap: 16px;
+  margin-top: 32px;
+  /* background: blue; */
+}
+
+#pokemon-name {
+  color: #d33f49;
+  font-weight: 700;
+  padding-left: 0;
+  margin-left: -4px;
+  margin-top: 8px;
+  /* is font size too big? what is longest pokemon name? */
+  font-size: 48px;
+  /* padding-top: 8px; */
+  height: 48px;
+}
+
+#pokemon h3 {
+  font-weight: 700;
+}
+
+.sprite-image {
+  /* background: red; */
+  height: 48px;
+  grid-column-start: 4;
+  grid-column-end: 5;
+  grid-row-start: 1;
+  grid-row-end: 1;
+  background: red;
+  display: none;
+}
+
+.sprite-image img {
+  height: 48px;
+  width: 48px;
+}
+
+#pokemon-details .pokemon-entry-header {
+  grid-row-start: 1;
+  grid-row-end: 1;
+  grid-column-start: 1;
+  grid-column-end: 3;
+  font-size: 16px;
+}
+
+#pokemon-details .pokemon-entry-text {
+  grid-row-start: 1;
+  grid-row-end: 1;
+  grid-column-start: 3;
+  grid-column-end: 5;
+}
+
+#pokemon-details .pokemon-types-header {
+  grid-row-start: 2;
+  grid-row-end: 2;
+  grid-column-start: 1;
+  grid-column-end: 2;
+}
+
+#pokemon-details .pokemon-types-text {
+  grid-row-start: 2;
+  grid-row-end: 2;
+  grid-column-start: 3;
+  grid-column-end: 5;
+}
+
+.pokemon-moves-header {
+  grid-row-start: 3;
+  grid-row-end: 3;
+  grid-column-start: 1;
+  grid-column-end: 2;
+}
+
+#pokemon-details ul {
+  grid-row-start: 3;
+  grid-row-end: 4;
+  grid-column-start: 3;
+  grid-column-end: 5;
+}
+
+#pokemon-details > ul > li {
+  margin-bottom: 8px;
+}
+
+.description-header {
+  margin-bottom: 8px;
+}
+
+#pokemon_GIF {
+  width: 100%;
+  margin-top: 24px;
+  padding-bottom: 112px;
+}
+
+.pokemon-gif {
+  width: 100%;
+  border-radius: 8px;
+}
+
+#getNextGIF {
+  width: 100%;
+  /* width is 50% i.e. 2 columns - half the gutter width (16 / 2 = 8px) */
+  width: 100%;
+  height: 32px;
+  background: #3663ad;
+  color: white;
+  font-weight: 700;
+  border: 1px solid black;
+  margin-top: 8px;
+  border-radius: 8px;
+  margin-bottom: 8px;
+}
+
+/* RESPONSIVE BREAKPOINT @ 600px */
+
+@media all and (min-width: 600px) {
+  main {
+    display: grid;
+    grid-template-columns:
+      1fr
+      1fr
+      1fr
+      1fr;
+    grid-column-gap: 16px;
+    grid-row-gap: 16px;
+    padding-left: 128px;
+    padding-right: 128px;
+    padding-top: 64px;
+  }
+
+  .search-box {
+    /* grid-column-start: 1;
+    grid-column-end: 5; */
+    height: 48px;
+    position:fixed;
+    bottom: 64px;
+    width: 100%;
+    background: #565554;
+    padding-top: 16px;
+  }
+  
+  .search-box input {
+    margin-left: 128px;
+    margin-right: 128px;
+    width: calc(100% - 256px);
+  }
+
+  .search-buttons {
+    display: inline-flex;
+    width: calc(100%);
+    flex-direction: row;
+    justify-content: space-between;
+    background: #565554;
+    padding-left: 128px;
+    padding-right: 128px;
+    padding-bottom: 24px;
+  }
+
+  .search-box button {
+    /* width is 50% i.e. 2 columns - half the gutter width (16 / 2 = 8px) */
+    width: calc(50% - 8px);
+    height: 32px;
+    background: #ffcb05;
+    border: 1px solid black;
+    margin-top: 16px;
+    border-radius: 8px;
+  }
+
+}
+
+@media all and (min-width: 750px) {
+  #getNextGIF {
+    width: calc(25% - 12px);
+    margin-left: calc(75% + 12px);
+  }
+
+  .search-buttons {
+    display: inline-flex;
+    width: calc(50%);
+    flex-direction: row;
+    justify-content: space-between;
+    background: #565554;
+    padding-left: 12px;
+    padding-right: 128px;
+    padding-bottom: 24px;
+  }
+
+  .search-box button {
+    /* width is 50% i.e. 2 columns - half the gutter width (16 / 2 = 8px) */
+    width: calc(50% - 4px);
+    height: 32px;
+    background: #ffcb05;
+    border: 1px solid black;
+    margin-top: 16px;
+    border-radius: 8px;
+  }
+
+  .search-box input {
+    width: calc(50% - 136px);
+    margin-right: 0;
+  }
+
+  .search-box {
+    height: 96px;
+    bottom: 0;
+  }
+}

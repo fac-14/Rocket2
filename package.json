@@ -1,0 +1,28 @@
+{
+  "name": "PokeGIF",
+  "version": "2.0.0",
+  "description": "",
+  "main": "src/server.js",
+  "scripts": {
+    "test": "nodemon logic.test.js | tap-spec",
+    "coverage": "nyc tape ./logic.test.js",
+    "start": "nodemon src/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:fac-14/Rocket2.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fac-14/Rocket2/issues"
+  },
+  "homepage": "https://github.com/fac-14/Rocket2#readme",
+  "devDependencies": {
+    "nodemon": "^1.18.3",
+    "nyc": "^12.0.2",
+    "tap-spec": "^5.0.0",
+    "tape": "^4.9.1"
+  }
+}
