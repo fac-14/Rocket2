@@ -10,7 +10,7 @@ const router = (request, response) => {
   contentType = {
     html: "text/html",
     css: "text/css",
-    javascript: "application/javascript",
+    js: "application/javascript",
     ico: "icon/x-icon",
     jpg: "image/jpeg",
     jpeg: "image/jpeg",
@@ -21,8 +21,12 @@ const router = (request, response) => {
   //for each endpoint, run corresponding function in handler
   if (URL === "/") {
     handler.home(request, response);
-  } else if (ext === "css") {
-    handler.css(request, response);
+  }
+  // else if (ext === "css") {
+  //   handler.css(request, response);
+  // }
+  else {
+    handler.public(request, response, contentType, ext);
   }
 };
 
