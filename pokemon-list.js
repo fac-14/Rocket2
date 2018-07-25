@@ -1,4 +1,4 @@
-{
+const pokemon = {
 	"count": 949,
 	"results": [
 		{
@@ -3798,4 +3798,6 @@
 			"name": "magearna-original"
 		}
 	]
-}
+}; 
+
+module.exports = pokemon; 

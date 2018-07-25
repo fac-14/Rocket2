@@ -14,13 +14,24 @@ test("Testing autocomplete returns an array", function(t) {
   t.deepEqual(actual, expected, "function has returned an array");
   actual = search([]);
   expected = "Error";
-  t.equal(actual, expected, "argument inputString must be a string");
+  t.deepEqual(actual, expected, "argument inputString must be a string");
   t.end();
 });
 
 test("Testing autocomplete returns array of information correctly", function(t) {
-  let actual = search("bu"); // user has entered a string input
-  let expected = ; // need to fill this in
-  t.deepEqual(actual,expected, "function has only return pokemon starting with bu");
+  let actual = search("ex"); // user has entered a string input
+  let expected = [
+    "exeggcute",
+    "exeggutor",
+    "exploud",
+    "excadrill",
+    "toxapex",
+    "exeggutor-alola"
+  ];
+  t.deepEqual(
+    actual,
+    expected,
+    "function has only return pokemon names including ex"
+  );
   t.end();
 });
