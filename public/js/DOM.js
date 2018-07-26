@@ -73,11 +73,12 @@
     //add the ID autoParent
     autoParentNode.id = "autoParent";
     response.forEach(function(name) {
+      var parsedName = name.charAt(0).toUpperCase() + name.substr(1);
       var child = document.createElement("li");
       child.classList.add("search-suggestion");
-      child.textContent = name;
+      child.textContent = parsedName;
       child.addEventListener("click", function() {
-        searchInput.value = name;
+        searchInput.value = parsedName;
         killChildren(autoContainer);
       });
       autoParentNode.appendChild(child);
