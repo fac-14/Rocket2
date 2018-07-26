@@ -111,6 +111,14 @@
     );
   });
 
+  document.addEventListener("click", function() {
+    if (document.activeElement === document.getElementById("search-input")) {
+      autoContainer.style.visibility = "visible";
+    } else {
+      autoContainer.style.visibility = "hidden";
+    }
+  });
+
   //abstract function to add text elements within pokemon details
   var addNewNode = function(parentNodeId, element, text, className) {
     var parent = document.getElementById(parentNodeId);
