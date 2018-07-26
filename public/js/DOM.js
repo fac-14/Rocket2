@@ -47,6 +47,10 @@
 
   var autoContainer = document.getElementById("autocomplete-container");
 
+  document.addEventListener("click", function() {
+    killChildren(autoContainer);
+  });
+
   function autocomplete(searchString) {
     if (searchString === "") {
       //remove parent autocomplete element

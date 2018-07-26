@@ -477,12 +477,24 @@ button {
 
 /* autocomplete styling */
 
+#autocomplete-container {
+  background: hotpink;
+  width: 100vw;
+  position: absolute;
+  margin-left: 128px;
+}
+
 #autoParent {
-  position: fixed;
+  position: absolute;
   background: yellow;
-  width: 50vw;
-  top: 75vh;
-  left: 25vw;
+  bottom: 0;
+  /* width: 50vw;
+  bottom: 10vh;
+  left: 25vw; */
+}
+
+#autoParent > li {
+  margin: 8px;
 }
 
 /* RESPONSIVE BREAKPOINT @ 600px */
