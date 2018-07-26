@@ -238,6 +238,40 @@ button {
   cursor: pointer;
 }
 
+/* autocomplete styling */
+
+#autocomplete-container {
+  width: 100vw;
+  position: absolute;
+  margin-left: 16px;
+  margin-right: 16px;
+  bottom: 28px;
+}
+
+#autoParent {
+  position: absolute;
+  background: #ff6b35;
+  border: 3px solid #ff6b35;
+  border-radius: 8px 8px 0 0;
+  bottom: 0;
+  width: calc(100% - 32px);
+  /* width: 50vw;
+  bottom: 10vh;
+  left: 25vw; */
+}
+
+#autoParent > li {
+  padding: 8px;
+  color: white;
+  cursor: pointer;
+}
+
+#autoParent > li:hover {
+  color: #f88257;
+  background: white;
+  border-radius: 4px;
+}
+
 /* Adding in the pokeball overlay */
 
 .pokemon-overlay {
@@ -475,39 +509,6 @@ button {
   margin-bottom: 8px;
 }
 
-/* autocomplete styling */
-
-#autocomplete-container {
-  width: 100vw;
-  position: absolute;
-  margin-left: 128px;
-  bottom: 60px;
-}
-
-#autoParent {
-  position: absolute;
-  background: #ff6b35;
-  border: 3px solid #ff6b35;
-  border-radius: 8px 8px 0 0;
-  bottom: 0;
-  width: calc(50% - 136px);
-  /* width: 50vw;
-  bottom: 10vh;
-  left: 25vw; */
-}
-
-#autoParent > li {
-  padding: 8px;
-  color: white;
-  cursor: pointer;
-}
-
-#autoParent > li:hover {
-  color: #f88257;
-  background: white;
-  border-radius: 4px;
-}
-
 /* RESPONSIVE BREAKPOINT @ 600px */
 
 @media all and (min-width: 600px) {
@@ -562,6 +563,15 @@ button {
     margin-top: 16px;
     border-radius: 8px;
   }
+
+  #autocomplete-container {
+    margin-left: 128px;
+    bottom: 28px;
+  }
+
+  #autoParent {
+    width: calc(100% - 256px);
+  }
 }
 
 @media all and (min-width: 750px) {
@@ -599,5 +609,38 @@ button {
   .search-box {
     height: 96px;
     bottom: 0;
+  }
+
+  /* autocomplete styling */
+
+  #autocomplete-container {
+    width: 100vw;
+    position: absolute;
+    margin-left: 128px;
+    bottom: 60px;
+  }
+
+  #autoParent {
+    position: absolute;
+    background: #ff6b35;
+    border: 3px solid #ff6b35;
+    border-radius: 8px 8px 0 0;
+    bottom: 0;
+    width: calc(50% - 136px);
+    /* width: 50vw;
+  bottom: 10vh;
+  left: 25vw; */
+  }
+
+  #autoParent > li {
+    padding: 8px;
+    color: white;
+    cursor: pointer;
+  }
+
+  #autoParent > li:hover {
+    color: #f88257;
+    background: white;
+    border-radius: 4px;
   }
 }
