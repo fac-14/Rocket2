@@ -56,8 +56,10 @@ function pokeParse(data, domcb) {
       typesParsed.push(data.types[i].type.name);
     }
     movesParsed = [];
-    for (var i = 0; i < 3; i++) {
-      movesParsed.push(data.moves[i].move.name);
+    if (data.moves.length) {
+      for (var i = 0; i < Math.min(data.moves.length, 3); i++) {
+        movesParsed.push(data.moves[i].move.name);
+      }
     }
     // setup the rest of our parse - more straightforward
     var pokeApiResponse = {
