@@ -19,6 +19,12 @@ const handler = {
     });
   },
 
+  search: function(request, response) {
+    console.log("Searching!");
+    response.writeHead(200, { "Content-Type": "application/javascript" });
+    response.end("['bulbasaur', 'ivysaur', 'venusaur']");
+  },
+
   public: function(request, response, contentType, ext) {
     fs.readFile(buildPath(request.url), function(error, file) {
       if (error) {
