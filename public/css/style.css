@@ -478,23 +478,32 @@ button {
 /* autocomplete styling */
 
 #autocomplete-container {
-  background: hotpink;
   width: 100vw;
   position: absolute;
   margin-left: 128px;
+  bottom: 60px;
 }
 
 #autoParent {
   position: absolute;
-  background: yellow;
+  background: #ff6b35;
+  border: 3px solid #ff6b35;
+  border-radius: 8px 8px 0 0;
   bottom: 0;
+  width: calc(50% - 136px);
   /* width: 50vw;
   bottom: 10vh;
   left: 25vw; */
 }
 
 #autoParent > li {
-  margin: 8px;
+  padding: 8px;
+  color: white;
+  cursor: pointer;
+}
+
+#autoParent > li:hover {
+  background: #f88257;
 }
 
 /* RESPONSIVE BREAKPOINT @ 600px */
