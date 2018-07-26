@@ -76,6 +76,10 @@
       var child = document.createElement("li");
       child.classList.add("search-suggestion");
       child.textContent = name;
+      child.addEventListener("click", function() {
+        searchInput.value = name;
+        killChildren(autoContainer);
+      });
       autoParentNode.appendChild(child);
       //create child elements and append to parent
     });
