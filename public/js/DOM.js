@@ -46,8 +46,11 @@
     }
   });
 
-  var lastSearch = "";
+  document.addEventListener("click", function() {
+    killChildren(autoContainer);
+  });
 
+  var lastSearch = "";
   function waitForInput(searchString) {
     lastSearch = searchString.split("").join("");
     setTimeout(function() {
@@ -66,7 +69,7 @@
     } else if (searchString !== lastString) {
       xhr(
         "GET",
-        "http://localhost:4000/search/" + searchString,
+        "/search/" + searchString,
         autocompleteCallback
       );
     }
@@ -82,9 +85,14 @@
     //add the ID autoParent
     autoParentNode.id = "autoParent";
     response.forEach(function(name) {
+      var parsedName = name.charAt(0).toUpperCase() + name.substr(1);
       var child = document.createElement("li");
       child.classList.add("search-suggestion");
-      child.textContent = name;
+      child.textContent = parsedName;
+      child.addEventListener("click", function() {
+        searchInput.value = parsedName;
+        killChildren(autoContainer);
+      });
       autoParentNode.appendChild(child);
       //create child elements and append to parent
     });
