@@ -4,7 +4,7 @@
   "description": "",
   "main": "src/server.js",
   "scripts": {
-    "test": "nodemon logic.test.js | tap-spec",
+    "test": "nodemon src/autocomplete.test.js | tap-spec",
     "coverage": "nyc tape ./logic.test.js",
     "start": "nodemon src/server.js"
   },

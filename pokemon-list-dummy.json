@@ -1,0 +1,28 @@
+{
+  "results": [
+    {
+      "url": "https://pokeapi.co/api/v2/pokemon/102/",
+      "name": "exeggcute"
+    },
+    {
+      "url": "https://pokeapi.co/api/v2/pokemon/103/",
+      "name": "exeggutor"
+    },
+    {
+      "url": "https://pokeapi.co/api/v2/pokemon/295/",
+      "name": "exploud"
+    },
+    {
+      "url": "https://pokeapi.co/api/v2/pokemon/530/",
+      "name": "excadrill"
+    },
+    {
+      "url": "https://pokeapi.co/api/v2/pokemon/748/",
+      "name": "toxapex"
+    },
+    {
+      "url": "https://pokeapi.co/api/v2/pokemon/10114/",
+      "name": "exeggutor-alola"
+    }
+  ]
+}
