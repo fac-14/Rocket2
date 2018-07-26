@@ -22,10 +22,10 @@ const handler = {
 
   search: function(request, response) {
     let searchTerm = request.url.split("/");
-    console.log(searchTerm[2]);
+    //console.log(searchTerm[2]);
     const searchResult = search(searchTerm[2]);
     response.writeHead(200, { "Content-Type": "application/json" });
-    console.log(searchResult);
+    //console.log(searchResult);
     response.write(JSON.stringify(searchResult));
     response.end();
   },
