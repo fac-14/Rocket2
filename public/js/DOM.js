@@ -46,18 +46,19 @@
   });
 
   var autoContainer = document.getElementById("autocomplete-container");
-
+  var lastSearch = ""; //stop mutation (if we have time)
   function autocomplete(searchString) {
     if (searchString === "") {
-      //remove parent autocomplete element
       killChildren(autoContainer);
-    } else {
+    } else if (lastSearch !== searchString) {
       xhr(
         "GET",
         "http://localhost:4000/search/" + searchString,
         autocompleteCallback
       );
     }
+
+    lastSearch = searchString;
   }
 
   function autocompleteCallback(data) {
