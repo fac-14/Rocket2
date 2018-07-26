@@ -22,11 +22,13 @@ const getFiveResults = (search, obj) => {
 const search = inputString => {
   if (typeof inputString === "string") {
     if (inputString === "") {
-      return [];
+      return "{'response':[]}";
     }
     const parsedInput = removeWhitespace(inputString);
     const resultsArray = getFiveResults(parsedInput, pokemonList);
-    return resultsArray;
+    let resultsObj = {};
+    resultsObj.response = resultsArray;
+    return resultsObj;
   } else {
     return "Error";
   }

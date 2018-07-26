@@ -1,17 +1,15 @@
 var test = require("tape");
 const search = require("./autocomplete");
 
-const dummyArray = [{}];
-
 test("Testing Tape is working", function(t) {
   t.equal(1, 1, "One should equal one");
   t.end();
 });
 
-test("Testing autocomplete returns an array", function(t) {
+test("Basic I/O functions", function(t) {
   let actual = search("");
-  let expected = [];
-  t.deepEqual(actual, expected, "function has returned an array");
+  let expected = "{'response':[]}";
+  t.deepEqual(actual, expected, "function has returned an empty JSON object");
   actual = search([]);
   expected = "Error";
   t.deepEqual(actual, expected, "argument inputString must be a string");
@@ -19,8 +17,10 @@ test("Testing autocomplete returns an array", function(t) {
 });
 
 test("Testing autocomplete returns array of information correctly", function(t) {
-  let actual = search("ex"); // user has entered a string input
-  let expected = ["exeggcute", "exeggutor", "exploud", "excadrill", "toxapex"];
+  let actual = JSON.stringify(search("ex")); // user has entered a string input
+  let expected = JSON.stringify({
+    response: ["exeggcute", "exeggutor", "exploud", "excadrill", "toxapex"]
+  });
   t.deepEqual(
     actual,
     expected,
@@ -31,21 +31,21 @@ test("Testing autocomplete returns array of information correctly", function(t) 
 
 test("Testing function ignores whitespace", function(t) {
   let actual = search("bulba saur"); // user has entered a string input
-  let expected = ["bulbasaur"];
+  let expected = { response: ["bulbasaur"] };
   t.deepEqual(
     actual,
     expected,
     "function should return bulbasaur when searching for bulba saur"
   );
-  actual = search("to ge pi"); // user has entered a string input
-  expected = ["togepi"];
+  actual = JSON.stringify(search("to ge pi")); // user has entered a string input
+  expected = JSON.stringify({ response: ["togepi"] });
   t.deepEqual(
     actual,
     expected,
     "function should return togepi when searching for to ge pi"
   );
-  actual = search("      charmander"); // user has entered a string input
-  expected = ["charmander"];
+  actual = JSON.stringify(search("      charmander")); // user has entered a string input
+  expected = JSON.stringify({ response: ["charmander"] });
   t.deepEqual(
     actual,
     expected,
@@ -56,21 +56,21 @@ test("Testing function ignores whitespace", function(t) {
 
 test("Capitalisation on Input", function(t) {
   let actual = search("Bulbasaur");
-  let expected = ["bulbasaur"];
+  let expected = { response: ["bulbasaur"] };
   t.deepEqual(
     actual,
     expected,
     "function should return bulbasaur when searching for Bulbasaur"
   );
-  actual = search("Charmander");
-  expected = ["charmander"];
+  actual = JSON.stringify(search("Charmander"));
+  expected = JSON.stringify({ response: ["charmander"] });
   t.deepEqual(
     actual,
     expected,
     "function should return charmander when searching for Charmander"
   );
-  actual = search("BuLbAsAuR");
-  expected = ["bulbasaur"];
+  actual = JSON.stringify(search("BuLbAsAuR"));
+  expected = JSON.stringify({ response: ["bulbasaur"] });
   t.deepEqual(
     actual,
     expected,
@@ -80,14 +80,14 @@ test("Capitalisation on Input", function(t) {
 });
 
 test("Remove invalid characters", function(t) {
-  let actual = search("bulbasa88ur");
-  let expected = ["bulbasaur"];
+  let actual = JSON.stringify(search("bulbasa88ur"));
+  let expected = JSON.stringify({ response: ["bulbasaur"] });
   t.deepEqual(actual, expected, "should ignore numbers");
-  actual = search("$%charmander");
-  expected = ["charmander"];
+  actual = JSON.stringify(search("$%charmander"));
+  expected = JSON.stringify({ response: ["charmander"] });
   t.deepEqual(actual, expected, "function should ignore special characters");
-  actual = search("(){}=>togepi");
-  expected = ["togepi"];
+  actual = JSON.stringify(search("(){}=>togepi"));
+  expected = JSON.stringify({ response: ["togepi"] });
   t.deepEqual(actual, expected, "should ignore characters used in JS");
   t.end();
 });

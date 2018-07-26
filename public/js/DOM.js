@@ -6,7 +6,7 @@
   var searchInput = document.querySelector('input[name="searchInput"]');
   var pokemonDetails = document.querySelector("#pokemon-details");
 
-  //opening pokeball animation vars 
+  //opening pokeball animation vars
   var pokeballBackground = document.querySelector(".pokemon-overlay");
   var pokeballLeft = document.querySelector(".pokemon-left");
   var pokeballRight = document.querySelector(".pokemon-right");
@@ -15,10 +15,10 @@
   //define search function
   function searchPokemon() {
     var x = document.getElementById("search-input").value.trim();
-      if (x == "") {
-        alert("Please enter a pokemon name! :)");
-        return;
-      } 
+    if (x == "") {
+      alert("Please enter a pokemon name! :)");
+      return;
+    }
     if (pokeballLeft.classList.contains("pokemon-left-animation")) {
       pokeballLeft.classList.remove("pokemon-left-animation");
       pokeballRight.classList.remove("pokemon-right-animation");
@@ -31,17 +31,54 @@
       pokeParse,
       pokeCallback
     );
-  };
+  }
 
   //add event listeners to trigger search
 
-  searchButton.addEventListener('click', searchPokemon);
-  var node = document.getElementById('search-input');
+  searchButton.addEventListener("click", searchPokemon);
+  var node = document.getElementById("search-input");
   node.addEventListener("keyup", function(event) {
     if (event.key === "Enter") {
-        searchPokemon();
+      searchPokemon();
+    } else {
+      autocomplete(node.value);
     }
   });
+
+  var autoContainer = document.getElementById("autocomplete-container");
+
+  function autocomplete(searchString) {
+    if (searchString === "") {
+      //remove parent autocomplete element
+      killChildren(autoContainer);
+    } else {
+      xhr(
+        "GET",
+        "http://localhost:4000/search/" + searchString,
+        autocompleteCallback
+      );
+    }
+  }
+
+  function autocompleteCallback(data) {
+    var response = data.response;
+    //remove parent
+    killChildren(autoContainer);
+    //create parent element
+    autoParentNode = document.createElement("ul");
+    //add the ID autoParent
+    autoParentNode.id = "autoParent";
+    response.forEach(function(name) {
+      var child = document.createElement("li");
+      child.classList.add("search-suggestion");
+      child.textContent = name;
+      autoParentNode.appendChild(child);
+      //create child elements and append to parent
+    });
+    //append parent to the DOM
+
+    autoContainer.appendChild(autoParentNode);
+  }
 
   randButton.addEventListener("click", function() {
     if (pokeballLeft.classList.contains("pokemon-left-animation")) {
@@ -101,7 +138,7 @@
     name = name.join("");
 
     //add name as h1 of page
-    var pokemonName = document.getElementById('pokemon-name');
+    var pokemonName = document.getElementById("pokemon-name");
     pokemonName.innerText = name;
 
     //add new child nodes to #pokemon-details
@@ -129,9 +166,9 @@
     for (i = 0; i < pokeResponse.type.length; i++) {
       if (i > 0) {
         types += " / ";
-        }
-      types += pokeResponse.type[i];
       }
+      types += pokeResponse.type[i];
+    }
 
     addDetailsNode("h3", "Types:", "pokemon-types-header");
     addDetailsNode("p", types, "pokemon-types-text");
@@ -139,7 +176,7 @@
     //create header for moves
 
     addDetailsNode("h3", "Moves:", "pokemon-moves-header");
-    
+
     //create UL for moves and add each move as an LI
     var movesList = document.createElement("ul");
     // var movesHeader = document.createElement("h3");
@@ -156,7 +193,7 @@
     });
     pokemonDetails.appendChild(movesList);
 
-    // ROUND 2: kick it all off again with a description call 
+    // ROUND 2: kick it all off again with a description call
     xhr(
       "GET",
       "https://pokeapi.co/api/v2/pokemon-species/" + pokeResponse.name,
