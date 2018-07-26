@@ -182,7 +182,7 @@ main {
   /* grid-column-start: 1;
   grid-column-end: 5; */
   height: 48px;
-  position:fixed;
+  position: fixed;
   bottom: 64px;
   width: 100%;
   background: #565554;
@@ -217,7 +217,6 @@ main {
 
 button {
   font-size: 16px;
-
 }
 
 .search-box button {
@@ -267,10 +266,10 @@ button {
 @keyframes rotate {
   from {
     transform: rotate(0deg);
-}
-to {
+  }
+  to {
     transform: rotate(359deg);
-}
+  }
 }
 
 .pokemon-left > img {
@@ -284,7 +283,7 @@ to {
 .pokemon-left {
   background-color: white;
   display: flex;
-  width: 50vw; 
+  width: 50vw;
   justify-content: flex-end;
   align-items: center;
   /* background-image: url(./pokeball-left.png);
@@ -305,7 +304,7 @@ to {
 
 .pokemon-right {
   background-color: white;
-  display: flex; 
+  display: flex;
   justify-content: flex-start;
   align-items: center;
   width: 50vw;
@@ -329,25 +328,25 @@ to {
   100% {
     transform: translate(-100%, 0);
   }
-} 
+}
 
 @keyframes exit-right {
   100% {
     transform: translate(100%, 0);
   }
-}   
+}
 
 @keyframes enter-left {
   100% {
     transform: translate(100%, 0);
   }
-} 
+}
 
 @keyframes enter-right {
   100% {
     transform: translate(-100%, 0);
   }
-}  
+}
 
 #pokemon {
   grid-column-start: 1;
@@ -476,6 +475,16 @@ to {
   margin-bottom: 8px;
 }
 
+/* autocomplete styling */
+
+#autoParent {
+  position: fixed;
+  background: yellow;
+  width: 50vw;
+  top: 75vh;
+  left: 25vw;
+}
+
 /* RESPONSIVE BREAKPOINT @ 600px */
 
 @media all and (min-width: 600px) {
@@ -497,13 +506,13 @@ to {
     /* grid-column-start: 1;
     grid-column-end: 5; */
     height: 48px;
-    position:fixed;
+    position: fixed;
     bottom: 64px;
     width: 100%;
     background: #565554;
     padding-top: 16px;
   }
-  
+
   .search-box input {
     margin-left: 128px;
     margin-right: 128px;
@@ -530,7 +539,6 @@ to {
     margin-top: 16px;
     border-radius: 8px;
   }
-
 }
 
 @media all and (min-width: 750px) {
