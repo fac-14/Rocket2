@@ -41,23 +41,39 @@
     if (event.key === "Enter") {
       searchPokemon();
     } else {
-      autocomplete(node.value);
+      //autocomplete(node.value);
+      waitForInput(node.value);
     }
   });
 
-  var autoContainer = document.getElementById("autocomplete-container");
+  document.addEventListener("click", function() {
+    killChildren(autoContainer);
+  });
 
+  var lastSearch = "";
+  function waitForInput(searchString) {
+    lastSearch = searchString.split("").join("");
+    setTimeout(function() {
+      if (searchString === lastSearch) {
+        autocomplete(searchString);
+      }
+    }, 500);
+  }
+
+  var autoContainer = document.getElementById("autocomplete-container");
+  var lastString = "";
   function autocomplete(searchString) {
     if (searchString === "") {
       //remove parent autocomplete element
       killChildren(autoContainer);
-    } else {
+    } else if (searchString !== lastString) {
       xhr(
         "GET",
-        "http://localhost:4000/search/" + searchString,
+        "/search/" + searchString,
         autocompleteCallback
       );
     }
+    lastString = searchString;
   }
 
   function autocompleteCallback(data) {
@@ -69,9 +85,14 @@
     //add the ID autoParent
     autoParentNode.id = "autoParent";
     response.forEach(function(name) {
+      var parsedName = name.charAt(0).toUpperCase() + name.substr(1);
       var child = document.createElement("li");
       child.classList.add("search-suggestion");
-      child.textContent = name;
+      child.textContent = parsedName;
+      child.addEventListener("click", function() {
+        searchInput.value = parsedName;
+        killChildren(autoContainer);
+      });
       autoParentNode.appendChild(child);
       //create child elements and append to parent
     });
@@ -96,6 +117,14 @@
       pokeParse,
       pokeCallback
     );
+  });
+
+  document.addEventListener("click", function() {
+    if (document.activeElement === document.getElementById("search-input")) {
+      autoContainer.style.visibility = "visible";
+    } else {
+      autoContainer.style.visibility = "hidden";
+    }
   });
 
   //abstract function to add text elements within pokemon details
