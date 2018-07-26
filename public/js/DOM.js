@@ -56,11 +56,7 @@
       //remove parent autocomplete element
       killChildren(autoContainer);
     } else {
-      xhr(
-        "GET",
-        "http://localhost:4000/search/" + searchString,
-        autocompleteCallback
-      );
+      xhr("GET", "/search/" + searchString, autocompleteCallback);
     }
   }
 
