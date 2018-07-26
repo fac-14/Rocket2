@@ -21,8 +21,10 @@ const handler = {
 
   search: function(request, response) {
     console.log("Searching!");
-    response.writeHead(200, { "Content-Type": "application/javascript" });
-    response.end("['bulbasaur', 'ivysaur', 'venusaur']");
+    response.writeHead(200, { "Content-Type": "application/JSON" });
+    response.end(
+      JSON.stringify({ response: ["bulbasaur", "ivysaur", "venusaur"] })
+    );
   },
 
   public: function(request, response, contentType, ext) {
