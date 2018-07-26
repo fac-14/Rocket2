@@ -26,7 +26,9 @@ const search = inputString => {
     }
     const parsedInput = removeWhitespace(inputString);
     const resultsArray = getFiveResults(parsedInput, pokemonList);
-    return resultsArray;
+    let resultsObj = {};
+    resultsObj.response = resultsArray;
+    return resultsObj;
   } else {
     return "Error";
   }
