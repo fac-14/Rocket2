@@ -56,8 +56,7 @@ function pokeParse(data, domcb) {
       typesParsed.push(data.types[i].type.name);
     }
     movesParsed = [];
-    if (data.moves.length > 0) {
-      console.log(data.moves);
+    if (data.moves.length) {
       for (var i = 0; i < Math.min(data.moves.length, 3); i++) {
         movesParsed.push(data.moves[i].move.name);
       }
