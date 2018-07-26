@@ -41,24 +41,36 @@
     if (event.key === "Enter") {
       searchPokemon();
     } else {
-      autocomplete(node.value);
+      //autocomplete(node.value);
+      waitForInput(node.value);
     }
   });
 
+  var lastSearch = "";
+
+  function waitForInput(searchString) {
+    lastSearch = searchString.split("").join("");
+    setTimeout(function() {
+      if (searchString === lastSearch) {
+        autocomplete(searchString);
+      }
+    }, 500);
+  }
+
   var autoContainer = document.getElementById("autocomplete-container");
-  var lastSearch = ""; //stop mutation (if we have time)
+  var lastString = "";
   function autocomplete(searchString) {
     if (searchString === "") {
+      //remove parent autocomplete element
       killChildren(autoContainer);
-    } else if (lastSearch !== searchString) {
+    } else if (searchString !== lastString) {
       xhr(
         "GET",
         "http://localhost:4000/search/" + searchString,
         autocompleteCallback
       );
     }
-
-    lastSearch = searchString;
+    lastString = searchString;
   }
 
   function autocompleteCallback(data) {
