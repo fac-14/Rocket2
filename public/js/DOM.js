@@ -12,6 +12,22 @@
   var pokeballRight = document.querySelector(".pokemon-right");
   var pokeballRotate = document.querySelector(".pokemon-container");
 
+  //create objects for our 4 API calls
+  var pokeApiCall = {};
+  var giphyApiCall = {};
+  var pokeDescriptionCall = {};
+  var autocompleteApiCall = {};
+
+  function abortXhr() {
+    if (firstRequestDone === "undefined") {
+      var firstRequestDone = true;
+    } else if (firstRequestDone) {
+      pokeApiCall.abort();
+      giphyApiCall.abort();
+      pokeDescriptionCall.abort();
+    }
+  }
+
   var count = 0;
 
   function setPokeball(openOrClose) {
@@ -25,9 +41,7 @@
       //}
     } else if (openOrClose === "open") {
       count++;
-      console.log(count);
       if (count === 3) {
-        console.log("opening pokeball");
         pokeballRotate.classList.remove("pokemon-container-rotate");
         pokeballBackground.classList.remove("pokemon-overlay-background");
         pokeballLeft.classList.add("pokemon-left-animation");
@@ -38,6 +52,7 @@
 
   //define search function
   function searchPokemon() {
+    abortXhr();
     var x = document.getElementById("search-input").value.trim();
     if (x == "") {
       alert("Please enter a pokemon name! :)");
@@ -46,9 +61,8 @@
 
     setPokeball("close");
 
-    var pokeApiCall = {};
-
     xhr(
+      pokeApiCall,
       "GET",
       "https://pokeapi.co/api/v2/pokemon/" + searchInput.value.toLowerCase(),
       pokeParse,
@@ -91,7 +105,12 @@
       //remove parent autocomplete element
       killChildren(autoContainer);
     } else if (searchString !== lastString) {
-      xhr("GET", "/search/" + searchString, autocompleteCallback);
+      xhr(
+        autocompleteApiCall,
+        "GET",
+        "/search/" + searchString,
+        autocompleteCallback
+      );
     }
     lastString = searchString;
   }
@@ -125,7 +144,9 @@
     //abortSearch();
     setPokeball("close");
     var rand = Math.floor(Math.random() * 802);
+    abortXhr();
     xhr(
+      pokeApiCall,
       "GET",
       "https://pokeapi.co/api/v2/pokemon/" + rand,
       pokeParse,
@@ -134,9 +155,6 @@
   });
 
   document.addEventListener("click", function() {
-    console.log(
-      document.activeElement === document.getElementById("search-input")
-    );
     if (document.activeElement === document.getElementById("search-input")) {
       autoContainer.style.visibility = "visible";
     } else {
@@ -172,8 +190,6 @@
 
   //callback function to be run on pokeAPI response
   var pokeCallback = function(pokeResponse) {
-    // console.log(pokeResponse);
-
     //remove all existing child nodes from #pokemon-details
     killChildren(pokemonDetails);
 
@@ -238,11 +254,11 @@
       movesList.appendChild(li);
     });
     pokemonDetails.appendChild(movesList);
-    console.log("pokeCallback done");
     setPokeball("open");
 
     // ROUND 2: kick it all off again with a description call
     xhr(
+      pokeDescriptionCall,
       "GET",
       "https://pokeapi.co/api/v2/pokemon-species/" + pokeResponse.name,
       pokeDescripParse,
@@ -255,6 +271,7 @@
     var giphyQuery =
       pokeResponse.entryNumber == 404 ? "ditto" : pokeResponse.name;
     xhr(
+      giphyApiCall,
       "GET",
       "https://api.giphy.com/v1/gifs/search?q=" +
         giphyQuery +
@@ -280,7 +297,6 @@
     header.appendChild(headerText);
     description.appendChild(header);
     description.appendChild(descripElem);
-    console.log("pokeDescripCallback done");
     setPokeball("open");
   };
 
@@ -288,7 +304,6 @@
 
   //callback function to be run on Giphy API response
   gifCallback = function(giphyResponse) {
-    // console.log(giphyResponse);
     if (giphyResponse) {
       gifArray = giphyResponse;
     }
@@ -303,7 +318,6 @@
     gif.classList.add("pokemon-gif");
 
     // animation - pull back the pokeball to reveal the MAGIC
-    console.log("gifCallback done");
     setPokeball("open");
 
     image.appendChild(gif);
