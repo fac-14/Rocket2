@@ -12,6 +12,30 @@
   var pokeballRight = document.querySelector(".pokemon-right");
   var pokeballRotate = document.querySelector(".pokemon-container");
 
+  var count = 0;
+
+  function setPokeball(openOrClose) {
+    if (openOrClose === "close") {
+      count = 0;
+      // if (pokeballLeft.classList.contains("pokemon-left-animation")) {
+      pokeballLeft.classList.remove("pokemon-left-animation");
+      pokeballRight.classList.remove("pokemon-right-animation");
+      pokeballBackground.classList.add("pokemon-overlay-background");
+      pokeballRotate.classList.add("pokemon-container-rotate");
+      //}
+    } else if (openOrClose === "open") {
+      count++;
+      console.log(count);
+      if (count === 3) {
+        console.log("opening pokeball");
+        pokeballRotate.classList.remove("pokemon-container-rotate");
+        pokeballBackground.classList.remove("pokemon-overlay-background");
+        pokeballLeft.classList.add("pokemon-left-animation");
+        pokeballRight.classList.add("pokemon-right-animation");
+      }
+    }
+  }
+
   //define search function
   function searchPokemon() {
     var x = document.getElementById("search-input").value.trim();
@@ -19,12 +43,11 @@
       alert("Please enter a pokemon name! :)");
       return;
     }
-    if (pokeballLeft.classList.contains("pokemon-left-animation")) {
-      pokeballLeft.classList.remove("pokemon-left-animation");
-      pokeballRight.classList.remove("pokemon-right-animation");
-      pokeballBackground.classList.add("pokemon-overlay-background");
-    }
-    pokeballRotate.classList.add("pokemon-container-rotate");
+
+    setPokeball("close");
+
+    var pokeApiCall = {};
+
     xhr(
       "GET",
       "https://pokeapi.co/api/v2/pokemon/" + searchInput.value.toLowerCase(),
@@ -35,10 +58,15 @@
 
   //add event listeners to trigger search
 
-  searchButton.addEventListener("click", searchPokemon);
+  searchButton.addEventListener("click", function() {
+    //abortSearch();
+    searchPokemon();
+  });
+
   var node = document.getElementById("search-input");
   node.addEventListener("keyup", function(event) {
     if (event.key === "Enter") {
+      //abortSearch();
       searchPokemon();
     } else {
       //autocomplete(node.value);
@@ -94,15 +122,9 @@
   }
 
   randButton.addEventListener("click", function() {
-    if (pokeballLeft.classList.contains("pokemon-left-animation")) {
-      pokeballLeft.classList.remove("pokemon-left-animation");
-      pokeballRight.classList.remove("pokemon-right-animation");
-      pokeballBackground.classList.add("pokemon-overlay-background");
-    }
-    pokeballRotate.classList.add("pokemon-container-rotate");
-    console.log("Testing Random!");
+    //abortSearch();
+    setPokeball("close");
     var rand = Math.floor(Math.random() * 802);
-    console.log("https://pokeapi.co/api/v2/pokemon/" + rand);
     xhr(
       "GET",
       "https://pokeapi.co/api/v2/pokemon/" + rand,
@@ -216,6 +238,8 @@
       movesList.appendChild(li);
     });
     pokemonDetails.appendChild(movesList);
+    console.log("pokeCallback done");
+    setPokeball("open");
 
     // ROUND 2: kick it all off again with a description call
     xhr(
@@ -256,6 +280,8 @@
     header.appendChild(headerText);
     description.appendChild(header);
     description.appendChild(descripElem);
+    console.log("pokeDescripCallback done");
+    setPokeball("open");
   };
 
   var gifArray = [];
@@ -277,11 +303,8 @@
     gif.classList.add("pokemon-gif");
 
     // animation - pull back the pokeball to reveal the MAGIC
-
-    pokeballRotate.classList.remove("pokemon-container-rotate");
-    pokeballBackground.classList.remove("pokemon-overlay-background");
-    pokeballLeft.classList.add("pokemon-left-animation");
-    pokeballRight.classList.add("pokemon-right-animation");
+    console.log("gifCallback done");
+    setPokeball("open");
 
     image.appendChild(gif);
   };
