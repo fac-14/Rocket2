@@ -1,19 +1,19 @@
 // modular xhr request
 // takes TWO callbacks: parsecb (for parsing the JSON response) (logic.js)
 // and domcb, for rendering to DOM (from dom.js)
-function xhr(method, url, parsecb, domcb) {
-  var xhr = new XMLHttpRequest();
-  xhr.onreadystatechange = function() {
+function xhr(xhrobject, method, url, parsecb, domcb) {
+  xhrobject = new XMLHttpRequest();
+  xhrobject.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
-      var result = JSON.parse(xhr.responseText);
+      var result = JSON.parse(xhrobject.responseText);
       parsecb(result, domcb);
     } else if (this.status == 404) {
       // return 404 as a number if a 404, helpful for functions
       parsecb(404, domcb);
     }
   };
-  xhr.open(method, url, true);
-  xhr.send();
+  xhrobject.open(method, url, true);
+  xhrobject.send();
 }
 
 // parse the pokemon description
