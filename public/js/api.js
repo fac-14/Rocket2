@@ -1,1 +1,1 @@
-var giphyApiKey = "YOUR KEY HERE";
+var giphyApiKey = "Insert your key here";
