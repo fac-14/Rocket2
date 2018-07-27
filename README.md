@@ -13,6 +13,7 @@ Be quiet. Just play with the autocomplete, ok.
 ## WHAT IF I WANT TO RUN IT LOCALLY 
 
 - Git clone
+- Pop a valid Giphy API key in the file public/js/api.js (check FAC14 Gitter if you'd like to use our key)
 - npm i
 - npm start
 - Profit! 
