@@ -46,10 +46,6 @@
     }
   });
 
-  document.addEventListener("click", function() {
-    killChildren(autoContainer);
-  });
-
   var lastSearch = "";
   function waitForInput(searchString) {
     lastSearch = searchString.split("").join("");
@@ -67,11 +63,7 @@
       //remove parent autocomplete element
       killChildren(autoContainer);
     } else if (searchString !== lastString) {
-      xhr(
-        "GET",
-        "/search/" + searchString,
-        autocompleteCallback
-      );
+      xhr("GET", "/search/" + searchString, autocompleteCallback);
     }
     lastString = searchString;
   }
@@ -120,6 +112,9 @@
   });
 
   document.addEventListener("click", function() {
+    console.log(
+      document.activeElement === document.getElementById("search-input")
+    );
     if (document.activeElement === document.getElementById("search-input")) {
       autoContainer.style.visibility = "visible";
     } else {
