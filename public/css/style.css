@@ -178,6 +178,15 @@ main {
   padding-top: 64px;
 }
 
+#pokeball-search {
+  position: absolute;
+  width: 20px;
+  height: auto;
+  /* padding-bottom: 8px; */
+  top: 22px;
+  left: 24px;
+}
+
 .search-box {
   /* grid-column-start: 1;
   grid-column-end: 5; */
@@ -187,6 +196,7 @@ main {
   width: 100%;
   background: #565554;
   padding-top: 16px;
+  z-index: 5;
 }
 
 .search-box input {
@@ -198,6 +208,7 @@ main {
   border-radius: 8px;
   margin-left: 16px;
   margin-right: 16px;
+  padding-left: 40px;
 }
 
 .search-box input:focus {
@@ -526,6 +537,10 @@ button {
     padding-top: 64px;
   }
 
+  #pokeball-search {
+    left: 136px;
+  }
+
   .search-box {
     /* grid-column-start: 1;
     grid-column-end: 5; */
@@ -592,6 +607,10 @@ button {
   #getNextGIF {
     width: calc(25% - 12px);
     margin-left: calc(75% + 12px);
+  }
+
+  #pokeball-search {
+    top: 38px;
   }
 
   .search-buttons {

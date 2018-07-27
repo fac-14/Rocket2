@@ -77,7 +77,8 @@
     //remove parent
     killChildren(autoContainer);
     if (response.length === 0) {
-      // TODO: can somebody PLEASE work out why this works and killChildren(autoContainer) here does NOT?
+      killChildren(autoContainer); // this works on Chrome
+      // TODO: can somebody PLEASE work out why this works on firefox and killChildren(autoContainer) here does NOT?
       return;
     } else {
       //create parent element
