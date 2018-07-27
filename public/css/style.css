@@ -574,7 +574,21 @@ button {
   }
 }
 
+/* BREAKPOINT AT 750px */
+
 @media all and (min-width: 750px) {
+  header {
+    height: 80px;
+  }
+
+  header > img {
+    height: 64px;
+  }
+
+  main {
+    padding-top: 96px;
+  }
+
   #getNextGIF {
     width: calc(25% - 12px);
     margin-left: calc(75% + 12px);
