@@ -67,11 +67,7 @@
       //remove parent autocomplete element
       killChildren(autoContainer);
     } else if (searchString !== lastString) {
-      xhr(
-        "GET",
-        "/search/" + searchString,
-        autocompleteCallback
-      );
+      xhr("GET", "/search/" + searchString, autocompleteCallback);
     }
     lastString = searchString;
   }
@@ -80,23 +76,28 @@
     var response = data.response;
     //remove parent
     killChildren(autoContainer);
-    //create parent element
-    autoParentNode = document.createElement("ul");
-    //add the ID autoParent
-    autoParentNode.id = "autoParent";
-    response.forEach(function(name) {
-      var parsedName = name.charAt(0).toUpperCase() + name.substr(1);
-      var child = document.createElement("li");
-      child.classList.add("search-suggestion");
-      child.textContent = parsedName;
-      child.addEventListener("click", function() {
-        searchInput.value = parsedName;
-        killChildren(autoContainer);
+    if (response.length === 0) {
+      // TODO: can somebody PLEASE work out why this works and killChildren(autoContainer) here does NOT?
+      return;
+    } else {
+      //create parent element
+      autoParentNode = document.createElement("ul");
+      //add the ID autoParent
+      autoParentNode.id = "autoParent";
+      response.forEach(function(name) {
+        var parsedName = name.charAt(0).toUpperCase() + name.substr(1);
+        var child = document.createElement("li");
+        child.classList.add("search-suggestion");
+        child.textContent = parsedName;
+        child.addEventListener("click", function() {
+          searchInput.value = parsedName;
+          killChildren(autoContainer);
+        });
+        autoParentNode.appendChild(child);
+        //create child elements and append to parent
       });
-      autoParentNode.appendChild(child);
-      //create child elements and append to parent
-    });
-    //append parent to the DOM
+      //append parent to the DOM
+    }
 
     autoContainer.appendChild(autoParentNode);
   }
